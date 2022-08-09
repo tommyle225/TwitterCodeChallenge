@@ -38,6 +38,7 @@ namespace TwitterCodeChallenge.Lib
                 using var resp = await HttpClient.SendAsync(req, HttpCompletionOption.ResponseHeadersRead);
                 resp.EnsureSuccessStatusCode();
                 await using var stream = await resp.Content.ReadAsStreamAsync();
+
                 using (var reader = new StreamReader(stream))
                 {
                     using var jReader = new JsonTextReader(reader);

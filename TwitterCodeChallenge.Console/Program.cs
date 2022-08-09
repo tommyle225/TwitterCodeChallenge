@@ -76,13 +76,13 @@ namespace TwitterCodeChallenge.ConsoleApp
             {
                 return HttpPolicyExtensions.HandleTransientHttpError()
                                            .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.TooManyRequests)
-                                           .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
+                                           .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(3, retryAttempt)));
             });
         }
         private static void LogResults()
         {
             Console.SetCursorPosition(0, 1);
-            string msg = $"Tweet Count: {TweetCount} \r\nTop Hashtags: {string.Join(",", HashTags?.Distinct().Take(10))}";
+            string msg = $"Tweet Count: {TweetCount} \r\nTop Hashtags: \r\n{string.Join(",", HashTags?.Distinct().Reverse().Take(10))}";
             Console.Write(msg);
         }
 
